@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'movies', to: 'movies#index'
   # config/routes.rb
   namespace :admin do
-    resources :movies, only: [:index]
+    resources :movies, only: [:index, :new, :create, :edit, :update, :destroy]
 
   end
 

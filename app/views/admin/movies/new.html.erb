@@ -1,0 +1,38 @@
+<!-- app/views/admin/movies/new.html.erb -->
+
+<h1>映画の新規登録</h1>
+<% if flash[:alert] %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+<%= form_for(@movie, url: admin_movies_path)  do |f| %>
+  <div class="field">
+    <%= f.label :タイトル %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :公開年 %>
+    <%= f.text_field :year %>
+  </div>
+
+  <div class="field">
+    <%= f.label :概要 %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= f.label :画像URL %>
+    <%= f.text_field :image_url %>
+  </div>
+
+  <div class="field">
+    <%= f.label :上映中 %>
+    <%= f.check_box :is_showing %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "登録" %>
+  </div>
+<% end %>

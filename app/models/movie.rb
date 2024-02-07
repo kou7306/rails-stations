@@ -1,4 +1,6 @@
 class Movie < ApplicationRecord
+
     # モデルの定義
-  end
+    validates :name, uniqueness: true
+end
   
