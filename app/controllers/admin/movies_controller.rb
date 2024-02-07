@@ -1,4 +1,5 @@
 class Admin::MoviesController < ApplicationController
+    before_action :set_movie, only: [:show, :edit, :update, :destroy]
     def index
         @movies = Movie.all
     end
@@ -24,7 +25,30 @@ class Admin::MoviesController < ApplicationController
             end
         end
         end
-    private
+         # GET /admin/movies/:id/edit
+  def edit
+  end
+
+  # PUT /movies/:id
+  def update
+    if @movie.update(movie_params)
+      redirect_to admin_movies_path, notice: '映画が更新されました。'
+    else
+      render :edit
+    end
+  end
+  # DELETE /admin/movies/:id
+  def destroy
+    if @movie.destroy
+      redirect_to admin_movies_path, notice: '映画が削除されました。'
+    else
+      redirect_to admin_movies_path, alert: '映画の削除に失敗しました。'
+    end
+  end
+  private
+    def set_movie
+      @movie = Movie.find(params[:id])
+    end
 
     # Strong Parametersを使用してフォームから受け取るパラメーターを指定
     def movie_params

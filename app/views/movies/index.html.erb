@@ -1,4 +1,18 @@
+
 <h1>映画一覧</h1>
+
+<%= form_tag movies_path, method: :get do %>
+  <p>
+    <%= text_field_tag :keyword, params[:keyword], placeholder: 'キーワードを入力' %>
+    <%= radio_button_tag :is_showing, '', params[:is_showing].blank? %>
+    <label for="is_showing_all">すべて</label>
+    <%= radio_button_tag :is_showing, '0', params[:is_showing] == '0' %>
+    <label for="is_showing_upcoming">公開予定</label>
+    <%= radio_button_tag :is_showing, '1', params[:is_showing] == '1' %>
+    <label for="is_showing_now_playing">公開中</label>
+  </p>
+  <%= submit_tag '検索' %>
+<% end %>
 
 <ul>
   <% @movies.each do |movie| %>

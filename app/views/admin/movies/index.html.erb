@@ -11,6 +11,7 @@
       <th>上映状況</th>
       <th>作成日時</th>
       <th>更新日時</th>
+      <th>操作</th> <!-- 編集ページへのリンクを追加するための列を追加 -->
     </tr>
   </thead>
   <tbody>
@@ -23,6 +24,9 @@
         <td><%= movie.is_showing ? "上映中" : "上映予定" %></td>
         <td><%= movie.created_at %></td>
         <td><%= movie.updated_at %></td>
+        <td>
+          <%= link_to '編集', edit_admin_movie_path(movie) %> <!-- 編集ページへのリンク -->
+        </td>
       </tr>
     <% end %>
   </tbody>
