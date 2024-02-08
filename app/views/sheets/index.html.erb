@@ -1,0 +1,27 @@
+<!-- app/views/sheets/index.html.erb -->
+<h1>座席表</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th></th> <!-- スペース -->
+      <th></th> <!-- スペース -->
+      <th>スクリーン</th>
+      <th></th> <!-- スペース -->
+      <th></th> <!-- スペース -->
+    </tr>
+  </thead>
+  <tbody>
+    <% current_row = nil %>
+    <% @seats.each do |seat| %>
+      <% if seat.row != current_row %>
+        <% current_row = seat.row %>
+        <tr>
+      <% end %>
+      <td><%= seat.row.upcase %>-<%= seat.column %></td>
+      <% if seat.column == 5 %>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

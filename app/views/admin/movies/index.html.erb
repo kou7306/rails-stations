@@ -12,20 +12,33 @@
       <th>作成日時</th>
       <th>更新日時</th>
       <th>操作</th> <!-- 編集ページへのリンクを追加するための列を追加 -->
+      <th>スケジュール</th> <!-- スケジュールを表示するための列を追加 -->
     </tr>
   </thead>
   <tbody>
     <% @movies.each do |movie| %>
       <tr>
-        <td><%= movie.name %></td>
+        <td><%= link_to movie.name, admin_movie_path(movie) %> </td>
         <td><%= movie.year %></td>
         <td><%= movie.description %></td>
-        <td><a href="<%= movie.image_url %>">画像</a></td>
+        <td><img src="<%= movie.image_url %>">画像</=></td>
         <td><%= movie.is_showing ? "上映中" : "上映予定" %></td>
         <td><%= movie.created_at %></td>
         <td><%= movie.updated_at %></td>
         <td>
           <%= link_to '編集', edit_admin_movie_path(movie) %> <!-- 編集ページへのリンク -->
+        </td>
+        <td>
+          <%# 映画に関連するスケジュールがあればそれらを表示する %>
+          <% if movie.schedules.any? %>
+            <ul>
+              <% movie.schedules.each do |schedule| %>
+                <li><%= "#{schedule.start_time.strftime('%Y-%m-%d %H:%M')} - #{schedule.end_time.strftime('%Y-%m-%d %H:%M')}" %></li>
+              <% end %>
+            </ul>
+          <% else %>
+            <span>スケジュールなし</span>
+          <% end %>
         </td>
       </tr>
     <% end %>

@@ -1,7 +1,7 @@
 class Admin::MoviesController < ApplicationController
     before_action :set_movie, only: [:show, :edit, :update, :destroy]
     def index
-        @movies = Movie.all
+        @movies = Movie.all.includes(:schedules)
     end
     def new
         @movie = Movie.new
@@ -45,6 +45,13 @@ class Admin::MoviesController < ApplicationController
       redirect_to admin_movies_path, alert: '映画の削除に失敗しました。'
     end
   end
+
+  def show
+    @movie = Movie.find(params[:id])
+    @schedules = @movie.schedules.order(:start_time)
+  end
+
+
   private
     def set_movie
       @movie = Movie.find(params[:id])

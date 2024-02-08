@@ -1,0 +1,18 @@
+<!-- app/views/admin/movies/show.html.erb -->
+<h1><%= @movie.name %> のスケジュール一覧</h1>
+
+<% if @schedules.any? %>
+  <ul>
+    <% @schedules.each do |schedule| %>
+      <li>
+        <%= link_to "#{schedule.start_time.strftime('%Y-%m-%d %H:%M')} - #{schedule.end_time.strftime('%Y-%m-%d %H:%M')}", admin_schedule_path(schedule) %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>この映画のスケジュールはありません</p>
+<% end %>
+
+<p><%= link_to "スケジュールを追加", new_admin_movie_schedule_path(@movie) %></p>
+
+<p><%= link_to "映画一覧へ戻る", admin_movies_path %></p>

@@ -1,19 +1,16 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-require_relative '../config/environment'
-# 映画データの配列を作成
-movies = [
-  { name: 'Star Wars', year: '1977', description: 'A long time ago in a galaxy far, far away...', image_url: 'https://placehold.jp/150x150.png', is_showing: true },
-  { name: 'Lord of the Rings', year: '2001', description: 'One ring to rule them all...', image_url: 'https://placehold.jp/150x150.png', is_showing: true },
-  # 他の映画データも追加可能
+# db/seeds.rb
+
+# 映画がすでに存在することを前提として、映画のIDを指定します
+movie_ids = [2, 15, 16]
+
+# スケジュールを追加するためのサンプルデータ
+schedules_data = [
+  { movie_id: 2, start_time: '10:00', end_time: '12:00' },
+  { movie_id: 15, start_time: '13:00', end_time: '15:00' },
+  { movie_id: 16, start_time: '16:00', end_time: '18:00' }
 ]
 
-# 配列内の映画データをデータベースに挿入
-movies.each do |movie_data|
-  Movie.create!(movie_data)
+# スケジュールを作成してデータベースに保存します
+schedules_data.each do |schedule_data|
+  Schedule.create(schedule_data)
 end

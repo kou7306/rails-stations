@@ -22,5 +22,28 @@ class MoviesController < ApplicationController
       # 絞り込まれた映画のリストを表示
       render 'index'
     end
+
+    def show
+        id = params[:id]
+        @movie = Movie.find_by_id(id)
+        if @movie.nil?
+          # IDに対応する映画が存在しない場合の処理
+          flash[:alert] = "この映画は存在しません。"
+          redirect_to movies_path
+        else
+          if @movie.is_showing
+            # 上映中の場合は詳細を表示
+            @schedules = @movie.schedules
+            render 'show'
+          else
+            # 上映中でない場合はエラーメッセージを表示
+            flash[:alert] = "この映画は現在上映されていません。"
+            redirect_to movies_path
+          end
+        end
+        
+    end
+
+      
   end
   
