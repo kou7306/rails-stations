@@ -17,7 +17,9 @@
 <ul>
   <% @movies.each do |movie| %>
     <li>
-      <%= movie.name %> - <img src="<%= movie.image_url %>">
+      <p><%= link_to "#{movie.name}", movie_path(movie) %> </p>
+      <img src="<%= movie.image_url %>">
+
     </li>
   <% end %>
 </ul>

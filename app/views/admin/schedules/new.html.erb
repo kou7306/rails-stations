@@ -1,4 +1,3 @@
-<!-- app/views/admin/schedules/new.html.erb -->
 <h1>新しいスケジュールを作成</h1>
 
 <%= form_with(model: [@movie, @schedule], url: admin_movie_schedules_path(@movie), method: :post) do |form| %>
@@ -15,12 +14,12 @@
 
   <div class="field">
     <%= form.label :start_time %>
-    <%= form.datetime_select :start_time %>
+    <%= form.time_select :start_time %>
   </div>
 
   <div class="field">
     <%= form.label :end_time %>
-    <%= form.datetime_select :end_time %>
+    <%= form.time_select :end_time %>
   </div>
 
   <div class="actions">
@@ -28,4 +27,4 @@
   </div>
 <% end %>
 
-<%= link_to "戻る", admin_movie_path(@movie) %>
+<%= link_to "戻る", admin_schedules_path %>

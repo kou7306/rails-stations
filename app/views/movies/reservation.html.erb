@@ -1,0 +1,27 @@
+<!-- app/views/sheets/index.html.erb -->
+<h1>座席表</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th></th> <!-- スペース -->
+      <th></th> <!-- スペース -->
+      <th>スクリーン</th>
+      <th></th> <!-- スペース -->
+      <th></th> <!-- スペース -->
+    </tr>
+  </thead>
+  <tbody>
+    <% current_row = nil %>
+    <% @sheets.each do |sheet| %>
+      <% if sheet.row != current_row %>
+        <% current_row = sheet.row %>
+        <tr>
+      <% end %>
+      <td><a href="<%= new_movie_schedule_reservation_path(reservation_info[:movie_id],reservation_info[:schedule_id], date:reservation_info[:date] ,sheet_id: sheet.id) %>"><%= sheet.row.upcase %>-<%= sheet.column %></a></td>
+      <% if sheet.column == 5 %>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

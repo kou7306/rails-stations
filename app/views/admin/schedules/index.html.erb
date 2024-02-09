@@ -4,7 +4,10 @@
   <h2><%= movie.name %></h2>
   <ul>
     <% schedules.each do |schedule| %>
-      <li><%= link_to "#{schedule.start_time.strftime('%Y-%m-%d %H:%M')} - #{schedule.end_time.strftime('%Y-%m-%d %H:%M')}", admin_schedule_path(schedule) %></li>
+      <li><%= link_to "#{schedule.start_time.strftime('%H:%M')} - #{schedule.end_time.strftime('%H:%M')}", admin_schedule_path(schedule) %></li>
     <% end %>
+    <p><%= link_to "スケジュールを追加", new_admin_movie_schedule_path(movie) %></p>
   </ul>
 <% end %>
+
+<%= link_to '映画管理', admin_movies_path %>

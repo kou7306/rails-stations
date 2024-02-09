@@ -2,6 +2,14 @@
 
 <h2><%= @movie.name %>のスケジュール</h2>
 
+
+<p><%= @movie.year %></p>
+<p><%= @movie.description %></p>
+<p><img src="<%= @movie.image_url %>">画像</=></p>
+<p><%= @movie.is_showing ? "上映中" : "上映予定" %></p>
+<p><%= @movie.created_at %></p>
+<p><%= @movie.updated_at %></p>
+
 <% if @schedules.present? %>
   <ul>
     <% @schedules.each do |schedule| %>
@@ -14,4 +22,24 @@
 <% else %>
   <p>この映画のスケジュールはありません。</p>
 <% end %>
+
+
+<%= form_with(url: movie_reservation_path(@movie), method: :get) do %>
+  <!-- 1週間先まで選択可能な日付のプルダウンメニュー -->
+  <%= select_tag :date, options_for_select((Date.today..1.week.from_now).map { |date| [date.strftime('%Y-%m-%d'), date] }) %>
+  
+  <!-- 上映スケジュールから時間を選ぶプルダウンメニュー -->
+  <% options = [] %>
+  <% @schedules.each do |schedule| %>
+    <% time_range = "#{schedule.start_time.strftime('%H:%M')} - #{schedule.end_time.strftime('%H:%M')}" %>
+    <% options << [time_range, schedule.id] %>
+  <% end %>
+  <%= select_tag :schedule_id, options_for_select(options) %>
+
+  <!-- 座席を予約するボタン -->
+  <%= button_tag "座席を予約する" %>
+<% end %>
+
+<!-- プルダウンに時間が入らない -->
+
 

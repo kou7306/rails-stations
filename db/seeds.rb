@@ -1,16 +1,24 @@
-# db/seeds.rb
+# seeds.rb
 
-# 映画がすでに存在することを前提として、映画のIDを指定します
-movie_ids = [2, 15, 16]
-
-# スケジュールを追加するためのサンプルデータ
-schedules_data = [
-  { movie_id: 2, start_time: '10:00', end_time: '12:00' },
-  { movie_id: 15, start_time: '13:00', end_time: '15:00' },
-  { movie_id: 16, start_time: '16:00', end_time: '18:00' }
+# Create sheets
+sheets_data = [
+  { column: 1, row: 'a' },
+  { column: 2, row: 'a' },
+  { column: 3, row: 'a' },
+  { column: 4, row: 'a' },
+  { column: 5, row: 'a' },
+  { column: 1, row: 'b' },
+  { column: 2, row: 'b' },
+  { column: 3, row: 'b' },
+  { column: 4, row: 'b' },
+  { column: 5, row: 'b' },
+  { column: 1, row: 'c' },
+  { column: 2, row: 'c' },
+  { column: 3, row: 'c' },
+  { column: 4, row: 'c' },
+  { column: 5, row: 'c' }
 ]
 
-# スケジュールを作成してデータベースに保存します
-schedules_data.each do |schedule_data|
-  Schedule.create(schedule_data)
+sheets_data.each do |data|
+  Sheet.create(data)
 end

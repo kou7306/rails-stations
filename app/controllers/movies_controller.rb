@@ -44,6 +44,30 @@ class MoviesController < ApplicationController
         
     end
 
+
+    def reservation
+      # movie_idを取得
+      movie_id = params[:movie_id]
+      
+      # schedule_idと日付(date)の両方が必須であることを確認
+      unless params[:schedule_id].present? && params[:date].present?
+        # schedule_idまたは日付(date)がない場合はリダイレクトして302を返す
+        redirect_to movies_path, status: 302
+        return
+      end
+      
+      # 予約可能な座席表を取得する処理を実装
+      # 以下はサンプルコードで、実際の処理に合わせて適切に変更する必要があります
+      @reservation_info = {
+        movie_id: movie_id,
+        schedule_id: params[:schedule_id],
+        date: params[:date]
+      }
+      @sheets = Sheet.all.order(:row, :column)
+      # 座席表を返す
+      # 以下はサンプルビューで、実際のビューに合わせて適切に変更する必要があります
+      render 'reservation', locals: { reservation_info: @reservation_info }
+    end
       
   end
   

@@ -11,15 +11,16 @@ class Admin::SchedulesController < ApplicationController
     @schedule = @movie.schedules.new
   end
 
-  # POST /admin/movies/:movie_id/schedules
   def create
-    @schedule = @movie.schedules.new(schedule_params)
+    schedule_params_with_datetime = schedule_params.merge(start_time: "#{params[:schedule][:start_date]} #{params[:schedule][:start_time]}", end_time: "#{params[:schedule][:end_date]} #{params[:schedule][:end_time]}")
+    @schedule = @movie.schedules.new(schedule_params_with_datetime)
     if @schedule.save
       redirect_to admin_schedules_path, notice: 'スケジュールが作成されました'
     else
       render :new
     end
   end
+  
 
   # PUT /admin/schedules/:id
   def update
@@ -57,9 +58,9 @@ class Admin::SchedulesController < ApplicationController
       @schedule = Schedule.find(params[:id])
     end
 
-    # スケジュールのパラメーターを取得する
-    def schedule_params
-        params.require(:schedule).permit(:start_time, :end_time)
-    end
+# スケジュールのパラメーターを取得する
+def schedule_params
+    params.require(:schedule).permit(:start_time, :end_time)
+end
 
 end
